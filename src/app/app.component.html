@@ -1,0 +1,42 @@
+<p-table #dt1 styleClass="p-datatable-gridlines" dataKey="id" [columns]="getTableColumns" [value]="buildingData | searchFilter: minPrice" [rows]="10" [rowsPerPageOptions]="[10, 20, 30, 40, 50, 60]" [paginator]="true" 
+[filterDelay]="0" [globalFilterFields]="['name','building.name','building_towers.tower_name','property_type.name', 'configuration.name', 'min_price', 'bedroom', 'bathroom', 'half_bathroom' ]">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal(applyFilterGlobal($event), 'contains')" placeholder="Search by Building Name, Tower Name, Property Type" />
+            </span>
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" [(ngModel)]="minPrice" placeholder="Please Enter Min Price" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th [pSortableColumn]="col.sort_field" *ngFor="let col of columns">
+                <div class="flex justify-content-between align-items-center">
+                    <span>{{col.label}}</span>
+                    <p-sortIcon [field]="col.sort_field"></p-sortIcon>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                <span *ngIf="col.type == 'name'">{{rowData[col.field]}}</span>
+                <span *ngIf="col.type == 'building'">{{rowData[col.field].name}}</span>
+                <span *ngIf="col.type == 'building_tower'">{{rowData[col.field].tower_name}}</span>
+                <span *ngIf="col.type == 'property_type'">{{rowData[col.field].name}}</span>
+                <span *ngIf="col.type == 'configuration'">{{rowData[col.field].name}}</span>
+                <span *ngIf="col.type == 'min_price'">{{rowData[col.field]}}</span>
+                <span *ngIf="col.type == 'bedroom'">{{rowData[col.field]}}</span>
+                <span *ngIf="col.type == 'bathroom'">{{rowData[col.field]}}</span>
+                <span *ngIf="col.type == 'half_bathroom'">{{rowData[col.field]}}</span>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+

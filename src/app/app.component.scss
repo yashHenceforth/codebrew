@@ -1,0 +1,38 @@
+::ng-deep {
+    p-table.p-element {
+        div.p-datatable.p-component {
+            width: 1400px;
+            display: block;
+            margin: 20px auto;
+            div.p-datatable-header.ng-star-inserted {
+                div.table-header {
+                    gap: 2px;
+                    .p-input-icon-right {
+                        width: 50% !important;
+                    }
+                    input.p-inputtext.p-component.p-element {
+                        width: 100% !important;
+                    }
+                }
+            }
+            div.p-datatable-wrapper {
+                table.p-datatable-table {
+                    thead.p-datatable-thead {
+                        tr {
+                            th {
+                                text-align: center !important;
+                            }
+                        }
+                    }
+                    tbody.p-element.p-datatable-tbody {
+                        tr {
+                            td {
+                                text-align: center !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
