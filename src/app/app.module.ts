@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFilterPipe } from './pipe/search-filter.pipe';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     TableModule,
     InputTextModule,
+    DropdownModule,
     FormsModule,
     BrowserAnimationsModule
   ],

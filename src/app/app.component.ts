@@ -11,7 +11,10 @@ export class AppComponent implements OnInit {
   @ViewChild('dt1') dt1: Table | undefined;
   title = 'codebrew';
   buildingData: Array<any> = [];
+  filterData: Array<any> = [];
   minPrice: Number = 0;
+  eachConfig: String = '';
+  configuration: Array<any> = []
 
   constructor(private httpSvc: GenericHttpService) {  }
 
@@ -34,13 +37,35 @@ export class AppComponent implements OnInit {
     return columns;
   }
 
+  compareObjects(obj1: any, obj2: any) {
+    return Object.keys(obj1).every(key => obj1[key] === obj2[key]);
+  }
+
   getBuildingData() {
-    return this.httpSvc.getData().subscribe((res: any) => {
+    this.httpSvc.getData().subscribe((res: any) => {
       this.buildingData = res.data;
+      let data:any[] = [];
+      this.buildingData.forEach((res: any) => {
+       data.push({label: res.configuration.name, value: res.configuration.name});
+      })
+      setTimeout(() => {
+        this.configuration = data.reduce((acc, current) => {
+          const isDuplicate = acc.some((obj: any) => this.compareObjects(obj, current));
+          if (!isDuplicate) {
+            acc.push(current);
+          }
+          return acc;
+        }, []);
+      }, 3000);
     })
   }
 
   applyFilterGlobal(event: any) {
     return event.target.value;
+  }
+
+  selectConfiguration(event: any) {
+    let data: any[] = this.buildingData;
+    this.filterData = data.filter((x: any) => x.configuration.name == event.value.label);
   }
 }
